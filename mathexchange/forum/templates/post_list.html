@@ -1,0 +1,57 @@
+{% extends "forum_list.html" %}
+{% load forum_tags %}
+{% load humanize %}
+{% load cache %}
+
+{% block title %}
+    Mathematics Answers
+{% endblock %}
+
+{% block headtitle %}
+    Mathematics Answers
+{% endblock %}
+
+{% block body %}
+
+    {% block search %}
+
+        {% search_bar %}
+
+        <div class="ui horizontal basic top-menu segments">
+            {% filter_dropdown %}
+        </div>
+
+    {% endblock %}
+
+    {% block listing %}
+
+        {% block filtermsg %}
+
+        {% endblock %}
+
+        <div class="ui divided items">
+            {% for post in posts %}
+                {% post_details post=post user=request.user avatar=avatar %}
+            {% empty %}
+                <div class="ui warn message">
+                    No posts found.
+                </div>
+            {% endfor %}
+        </div>
+    {% endblock %}
+
+    <div class="ui page-bar segment">
+        {% pages objs=posts %}
+    </div>
+
+{% endblock %}
+
+{% block sidebar %}
+
+    {% include "banners/insert-sidebar-top.html" %}
+
+    {% cache 600 "default" request.user.pk %}
+        {% default_feed user=request.user %}
+    {% endcache %}
+
+{% endblock %}

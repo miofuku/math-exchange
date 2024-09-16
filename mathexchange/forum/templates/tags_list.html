@@ -1,0 +1,38 @@
+{% extends "forum_base.html" %}
+{% load forum_tags %}
+{% block title %}
+    MathExchange Tags
+{% endblock %}
+{% block content %}
+
+    {% search_bar tags=True %}
+    {% if query %}
+        <div class="ui message"> <i class="search icon"></i>Searching for tags containing: <b>{{ query }}</b></div>
+    {% endif %}
+
+    {% block top-page %}
+    <div class="center-text">
+        {% pages objs=tags %}
+    </div>
+        {% endblock %}
+
+    <div class="ui seven column tag-list grid">
+        {% for tag in tags %}
+            <div class="column">
+                <div class="item">
+                    <a class="ptag" href="{% url 'post_tags' tag %}">
+                        {{ tag }}
+                    </a>
+                    &times; {{ tag.nitems }}
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+    {% block bottom-page %}
+    <div class="center-text">
+        {% pages objs=tags %}
+    </div>
+    {% endblock %}
+
+{% endblock %}

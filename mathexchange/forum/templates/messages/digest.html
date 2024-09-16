@@ -1,0 +1,31 @@
+
+{%  block subject %}
+
+    [MathExchange] {{ subject }}
+
+{% endblock %}
+
+{% block html %}
+
+    The posts included in your digest are:
+    {% for post in posts %}
+       &bull; <a href="{{ protocol }}://{{ domain }}{{ post.get_absolute_url }}">{{ post.title }}</a>
+    {% endfor %}
+
+   <p class="muted" >
+        You may visit {{ protocol }}://{{ domain }}
+    </p>
+
+{% endblock %}
+
+{% block text %}
+
+    The posts included in your digest are:
+    {% for post in posts %}
+        &bull; {{ post.title }}
+    {% endfor %}
+
+    You may visit {{ protocol }}://{{ domain }}
+
+{% endblock %}
+

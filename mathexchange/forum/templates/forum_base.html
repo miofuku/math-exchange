@@ -1,0 +1,124 @@
+{% load static %}
+{% load compress %}
+{% load forum_tags %}
+{% load accounts_tags %}
+
+<html>
+<head>
+
+    <title>
+        {% block title %}MathExchange{% endblock %}
+    </title>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    {# Set the favicon #}
+    {% block favicon %}
+        <link rel="icon" href="{% static 'forum_favicon.ico' %}" type="image/x-icon"/>
+    {% endblock %}
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    {# Optional block header content. #}
+    {% block head %}
+    {% endblock %}
+
+    {# Google tracker injected if it exists in the context. Set in the django settings. #}
+    {% if google_tracker %}
+        <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id={{ google_tracker }}"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+
+            function gtag() {
+                dataLayer.push(arguments);
+            }
+
+            gtag('js', new Date());
+
+            gtag('config', "{{ google_tracker }}");
+        </script>
+
+    {% endif %}
+
+    {#  CSS compression. #}
+    {% compress css %}
+
+        <link href="{% static 'semantic.min.css' %}" rel="stylesheet">
+        {#  Preload key requests #}
+        <link href="{% static 'forum.css' %}{% randparam %}" rel="stylesheet">
+        {% block cssfile %}
+        {% endblock %}
+
+    {% endcompress %}
+
+    {# Javascript compression. #}
+    {% compress js %}
+        <script src="{% static 'semantic.min.js' %}"></script>
+        <script src="{% static 'setup.js' %}{% randparam %}"></script>
+        <script src="{% static 'forum.js' %}{% randparam %}"></script>
+        <script src="{% static 'inplace.js' %}{% randparam %}"></script>
+        {% block jsfile %}
+        {% endblock %}
+
+        {% block themesjs %}
+        {% endblock %}
+    {% endcompress %}
+
+    {% block extrajs %}
+    {% endblock %}
+
+    {# Optional css header content. #}
+    {% block css %}
+    {% endblock %}
+
+    {# Optional javascaript header content. #}
+    {% block js %}
+    {% endblock %}
+
+</head>
+
+
+<body itemscope itemtype="https://schema.org/QAPage">
+
+<div class="ui inverted container main">
+
+    {% include 'banners/top-banner.html' %}
+
+    <span class="menus">
+        {% block topmenu %}
+            {% include "banners/menu-header.html" %}
+            {% include "banners/menu-topics.html" %}
+        {% endblock %}
+    </span>
+
+    <span class="phone-menus">
+        {% include "banners/menu-phone.html" %}
+    </span>
+
+    {% block container %}
+        {% if messages %}
+            {% show_messages messages %}
+        {% endif %}
+        <div class="ui bottom attached segment block">
+
+            {% block content %}
+                MAIN CONTENT
+            {% endblock %}
+
+        </div>
+    {% endblock %}
+
+    {% block footer %}
+        {% include 'widgets/footer.html' %}
+    {% endblock %}
+
+    {% include 'banners/bottom-banner.html' %}
+
+</div>
+
+
+</body>
+
+
+</html>

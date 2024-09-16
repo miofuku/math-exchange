@@ -1,0 +1,74 @@
+{% extends "forum_list.html" %}
+{% load forum_tags %}
+{% load accounts_tags %}
+{% load humanize %}
+{% load cache %}
+
+
+{% block body %}
+
+    {% block search %}
+
+        {% search_bar %}
+
+    {% endblock %}
+    {% search_pages indexed %}
+
+  <div class="ui simple compact dropdown item">
+      Order by: {{ order|capfirst }}
+
+    <i class="dropdown icon"></i>
+    <div class="menu">
+      <a class="item" href="{% url 'post_search' %}?query={{ query }}&order=relevance">
+          <i class="star icon"></i> Relevance</a>
+      <a class="item" href="{% url 'post_search' %}?query={{ query }}&order=date">
+          <i class="calendar icon"></i>Date</a>
+
+    </div>
+  </div>
+
+
+    <div class="ui divided items">
+        {% for result in results %}
+
+            <div class="post item">
+                <div class="content">
+                    <div class="header">
+                        <a href="{% url 'post_view' result.uid %}"
+                           class="ui mini blue title header">{{ result.title|safe|truncatechars_html:200 }}
+                        </a>
+                    </div>
+                    <div class="muted ">
+                        {{ result.content|safe|truncatechars_html:400 }}
+                    </div>
+                    <div class=" extra right floated">
+                        <div class="left floated">
+                            {% post_tags tags_str=result.tags spaced=False %}
+                        </div>
+                        <div class="right floated muted">
+                             updated {{ result.lastedit_date|time_ago }} &bull; {{ result.author|truncatechars:40 }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        {% empty %}
+            <div class="ui warn message">
+                No posts found.
+            </div>
+        {% endfor %}
+    </div>
+ {% search_pages indexed %}
+{% endblock %}
+
+
+{% block sidebar %}
+
+    {% cache 60 sidebar %}
+
+        {% default_feed user=request.user %}
+
+    {% endcache %}
+
+
+{% endblock %}

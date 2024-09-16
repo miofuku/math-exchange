@@ -1,0 +1,52 @@
+{% extends "forum_base.html" %}
+{% load forum_tags %}
+{% load accounts_tags %}
+{% load humanize %}
+
+{% block title %}
+    MathExchange Community
+{% endblock %}
+
+{% block headtitle %}
+    Community
+{% endblock %}
+
+
+{% block content %}
+
+    {% search_bar users=True %}
+
+    {% if query %}
+        <div class="ui message"><i class="search icon"></i>Searching for users containing: <b>{{ query }}</b></div>
+    {% endif %}
+
+
+        <div class="ui horizontal basic top-menu segments">
+            {% with params=request.GET.urlencode %}
+                {% include 'banners/menu-community.html' %}
+            {% endwith %}
+        </div>
+
+
+    <div class="ui basic segment">
+
+        <div class="ui six column grid">
+            {% for target in users %}
+
+                <div class="column">
+                    {% user_card target %}
+                </div>
+
+            {% endfor %}
+        </div>
+
+    </div>
+    {% block bottom_pagebar %}
+        <div class="ui horizontal basic top-menu segments">
+            <div class="ui page-bar segment">
+                {% pages objs=users %}
+            </div>
+        </div>
+    {% endblock %}
+
+{% endblock %}

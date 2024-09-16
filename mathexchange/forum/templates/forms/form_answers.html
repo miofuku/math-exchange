@@ -1,0 +1,68 @@
+{% load forum_tags %}
+
+{% include 'forms/form_answers_msg.html' %}
+
+<div class="answer-text droppable" data-value="NEW">
+    <div class="ui small header">Add your answer</div>
+
+    <form method="post" class="ui form" action="{% url 'post_view' post.uid %}">
+        {% form_errors form %}
+        {{ form.media }}
+        {% csrf_token %}
+        <input type="hidden" name="parent_uid" id="parent_uid" value="{{ post.uid }}">
+
+        <div class="ui form-wrap segment">
+
+            <div class="required input field">
+                {% include 'widgets/post_message.html' %}
+                {% include 'widgets/textarea.html' %}
+
+            </div>
+        </div>
+        <p class="muted">Tips: CTRL+ENTER to submit the form. ESC to cancel. Markdown accepted.</p>
+
+        <div class="ui preview segment"></div>
+
+        {% if form.captcha %}
+            <div class="required captcha field">
+                {{ form.captcha }}
+            </div>
+        {% endif %}
+
+            <button type="submit" class="ui submit green button">
+                <i class="check icon"></i>Save
+            </button>
+
+            <a class="ui button cancel">
+                <i class="undo icon"></i>Cancel
+            </a>
+    </form>
+
+</div>
+
+<script>
+    $(document).ready(function () {
+
+        $('.answer-text #wmd-input').keyup(function (event) {
+
+            var save = $('.answer-text').find('.submit');
+            // Submit form with CTRL-ENTER
+            if (event.ctrlKey && (event.keyCode === 13 || event.keyCode === 10)) {
+                save.click();
+            }
+
+        });
+        $('body').keyup(function (event) {
+            if (event.keyCode === 27) {
+                // Cancel answer text area.
+                $('.answer-text textarea').val('')
+            }
+        });
+
+        $(this).on('click', '.answer-text .cancel', function () {
+            // Cancel answer text area.
+            $('.answer-text textarea').val('')
+        });
+    })
+</script>
+

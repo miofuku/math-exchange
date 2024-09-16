@@ -1,0 +1,32 @@
+{% extends "forum_base.html" %}
+
+{% block content %}
+
+    <div class="ui stackable grid">
+
+        <div class="fit twelve wide content column">
+            {% block body %}
+                {% block search %}
+                    SEARCH
+                {% endblock %}
+                MAIN BODY
+            {% endblock %}
+        </div>
+
+        <div class="four wide column sidefeed">
+
+            <div class="ui large wrap-text" id="sidebar">
+                {% block sidebar %}
+                    SIDE BAR
+                {% endblock %}
+            </div>
+        </div>
+
+    </div>
+
+    {# This information is cached and updated periodically via the context. #}
+    <div id="traffic">Traffic: {{ TRAFFIC }} users visited in the last hour</div>
+
+
+{% endblock %}
+

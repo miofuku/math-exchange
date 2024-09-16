@@ -90,7 +90,7 @@ runtest:
 	@echo DJANGO_APP=${DJANGO_APP}
 	$(eval DJANGO_SETTINGS_MODULE=mathexchange.server.test_settings)
 	coverage run manage.py test ${TEST} --settings ${DJANGO_SETTINGS_MODULE} -v 2 --failfast
-	coverage html --skip-covered --omit="conf/*,mathexchange/celery.py,mathexchange/celeryconf.py"
+	coverage html --skip-covered --omit="config/*,mathexchange/celery.py,mathexchange/celeryconf.py"
 
 	# Remove files associated with tests
 	rm -rf export/tested

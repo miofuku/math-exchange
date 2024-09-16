@@ -1,0 +1,59 @@
+{% extends "forum_base.html" %}
+{% load static %}
+{% load accounts_tags %}
+{% load forum_tags %}
+
+{% block title %}User: {{ target.profile.name }}{% endblock %}
+
+{% block headtitle %}{{ target.profile.name }}{% endblock %}
+
+{% block head %}
+    <script async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+    <link disabled rel="stylesheet"
+          href="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.18.0/build/styles/default.min.css">
+    <script async src="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.18.0/build/highlight.min.js"></script>
+{% endblock %}
+
+{% block jsfile %}
+    <script src="{% static 'semantic.min.js' %}"></script>
+    <script src="{% static 'prism.js' %}"></script>
+    <script src="{% static 'setup.js' %}{% randparam %}"></script>
+    <script src="{% static 'forum.js' %}{% randparam %}"></script>
+{% endblock %}
+
+
+{% block content %}
+    <div class="ui vertical segment">
+
+        <div class="ui top attached tabular  menu">
+            <a class="{% activate 'profile' active %}  item"
+               href="{{ target.profile.get_absolute_url }}?active=profile">
+                <i class="user icon"></i><span class="phone">Profile</span>
+            </a>
+
+            <a class="{% activate 'posts' active %} item" href="{{ target.profile.get_absolute_url }}?active=posts">
+                <i class="list alternate outline icon"></i><span class="phone"> Posts</span>
+            </a>
+
+            <a class="{% activate 'awards' active %}  item" href="{{ target.profile.get_absolute_url }}?active=awards">
+                <i class="star outline icon"></i><span class="phone">Awards</span>
+            </a>
+
+        </div>
+
+        <div class="ui bottom attached profile segment">
+            {% if active == 'profile' %}
+                {% include 'accounts/profile_tab.html' %}
+            {% elif active == 'posts' %}
+                {% include 'accounts/post_tab.html' %}
+            {% else %}
+                {% list_awards target=target %}
+            {% endif %}
+
+        </div>
+
+    </div>
+
+{% endblock %}
