@@ -5,10 +5,9 @@ import os
 from mathexchange.settings import *
 from mathexchange.accounts.settings import *
 from mathexchange.emailer.settings import *
-from mathexchange.recipes.settings import *
 from mathexchange.forum.settings import *
 
-INSTALLED_APPS = DEFAULT_APPS + FORUM_APPS + PAGEDOWN_APP + PLANET_APPS + ENGINE_APPS + ACCOUNTS_APPS + EMAILER_APP
+INSTALLED_APPS = DEFAULT_APPS + FORUM_APPS + PAGEDOWN_APP + PLANET_APPS + ACCOUNTS_APPS + EMAILER_APP
 
 TASK_RUNNER = 'block'
 

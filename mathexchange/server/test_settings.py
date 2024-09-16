@@ -6,7 +6,7 @@ TASK_RUNNER = "block"
 
 INIT_PLANET = False
 
-# Skip hitting the spam indexe when creating test posts
+# Skip hitting the spam index when creating test posts
 CLASSIFY_SPAM = False
 
 # Turn the emailing tasks off for tests

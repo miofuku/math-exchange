@@ -6,15 +6,11 @@ import debug_toolbar
 from django.conf.urls.static import static
 from mathexchange.forum.urls import forum_patterns
 from mathexchange.accounts.views import image_upload_view
-from mathexchange.recipes.urls import recipes_patterns
 import mathexchange.accounts.urls as accounts_urls
 from mathexchange.planet.urls import planet_patterns
 
 
 urlpatterns = [
-
-    # Mount recipes urls on root.
-    path(r'', include(recipes_patterns)),
 
     # Include forum urls
     path(r'forum/', include(forum_patterns)),

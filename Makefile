@@ -23,15 +23,12 @@ TEST := mathexchange
 INDEX_DIR := search
 # Some variables need to come from the enviroment.
 
-.PHONY:  recipes accounts demo
+.PHONY:  accounts demo
 
-# Recipes database to copy
-export COPY_DATABASE := recipes.db
-
-# Database name is accessed via an enviroment variable.
+# Database name is accessed via an environment variable.
 export DATABASE_NAME := database.db
 
-all: recipes serve
+all: serve
 
 accounts:
 	@echo "*** Setting variables for accounts app."
@@ -45,17 +42,6 @@ emailer:
 	$(eval DJANGO_SETTINGS_MODULE := mathexchange.emailer.settings)
 	$(eval DJANGO_APP := mathexchange.emailer)
 	$(eval TEST:=mathexchange.emailer)
-
-recipes:
-	@echo "*** Setting variables for recipe app."
-	$(eval DJANGO_SETTINGS_MODULE := mathexchange.recipes.settings)
-	$(eval DJANGO_APP := mathexchange.recipes)
-	$(eval LOAD_COMMAND := project)
-	$(eval UWSGI_INI := conf/site/site_uwsgi.ini)
-	$(eval WSGI_FILE := mathexchange/recipes/wsgi.py)
-	$(eval TASKS_MODULE := mathexchange.recipes.tasks)
-	$(eval TARGET:=recipes)
-	$(eval TEST:=mathexchange.recipes)
 
 forum:
 	@echo "*** Setting variables for forum app."

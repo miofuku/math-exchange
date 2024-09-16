@@ -3,7 +3,7 @@
 
 ``
 
-# Run a demo of both recipes and forum.
+# Run a demo of forum.
 make demo
 ``
 
