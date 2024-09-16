@@ -1,6 +1,6 @@
 # Moderator guidelines
 
-Thank you for being a moderator. Your contributions and participation on Biostar is being recognized by providing you with extended rights over the site's operation.
+Thank you for being a moderator. Your contributions and participation on MathExchange is being recognized by providing you with extended rights over the site's operation.
 
 ### Contacting other moderators
 
@@ -8,7 +8,7 @@ A private Slack Channel is used as the primary means of communicating with other
 
 Participation is optional. As a moderator you are welcome to join at any time.
 
-The Moderator Log page has an invite to the **Biostar Moderator Slack Channel**.
+The Moderator Log page has an invitation to the **MathExchange Moderator Slack Channel**.
 
 ### Moderator rights
 
@@ -63,11 +63,11 @@ Marking a post as spam suspends the author of the post.
 
 Try to be generous in your assesment on what constitutes "off-topic" content.
  
-Bioinformatics is a broad field, often it is hard to tell what is a bioinformatics and what is "pure programming" or "statistics". Usually it is effective and more constructive to point readers to the appropriate source instead of informing them that the post is off topic.
+Mathematics is a broad field, often it is hard to tell what is a mathematics and what is "pure programming" or "statistics". Usually it is effective and more constructive to point readers to the appropriate source instead of informing them that the post is off topic.
 
-Marking a post off topic generates a comment (and a notification to the user).
+Marking a post off-topic generates a comment (and a notification to the user).
 
-Off topic content may be periodically removed.
+Off-topic content may be periodically removed.
 
 ### User reputation
 
@@ -84,7 +84,7 @@ extended periods of time may lose their moderation rights.
 
 ### How to modify this page
 
-1. Fork the repository at:  https://github.com/ialbert/biostar-central
+1. Fork the repository at:  https://github.com/miofuku/math-exchange
 2. Navigate to `docs/forum/mods.md` in your fork.
 3. Edit the page via GitHub or on your system then commit to your fork. 
 4. Generate a pull request to the upstream.
